@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addTodo } from "../redux/store";
+import { add } from "../redux/store";
 import Todos from "../components/Todos";
 
 const Home = () => {
@@ -12,7 +12,7 @@ const Home = () => {
   }
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(addTodo(text));
+    dispatch(add(text));
   }
   return (
     <>

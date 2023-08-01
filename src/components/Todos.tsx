@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { RootState, deleteTodo } from "../redux/store";
+import { RootState, remove } from "../redux/store";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
@@ -8,7 +8,7 @@ const Todos = () => {
   const todos = useSelector((state: RootState) => state.todos);
 
   const handleDeleteButton = (id: string) => {
-    dispatch(deleteTodo(id))
+    dispatch(remove(id))
   }
   return (
     <>

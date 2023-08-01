@@ -1,13 +1,13 @@
 # 정리
 
-## 1. `createAction` + 직접 reducer 설정
+## 1. createAction + 직접 reducer 설정
 - rtk의 `createAction` 함수를 사용하여 action creator 정의
 - `createAction` 함수는 자동으로 action creator 함수를 생성하여 action object를 생성한다.
   - (ex. { type: 'ADD', payload: actionPayload })
 - 그 후 reducer 함수를 직접 정의하여, `action type`과 `payload`를 기반으로 상태가 어떻게 업데이트되는지를 지정합니다.
 - state가 변화하면 state를 직접 변경하지 않고, reducer 함수에서 새로운 state를 생성하여 반환한다.
 
-## 2. `createAction` + `createReducer`
+## 2. createAction + createReducer
 - rtk의 `createAction` 및 `createReducer` 함수를 모두 사용한다.
 - `createAction` 함수는 1번 방법과 마찬가지로 action creator를 정의하는데 사용
 - `createReducer` 함수는 reducer를 보다 간결하게 정의하고, action type에 따라 state 업데이트를 자동으로 처리하는 reducer 함수를 생성한다.
@@ -70,5 +70,62 @@ const reducer = createReducer(initialState, (builder) => {
 
 const store = createStore(reducer);
 
+export default store;
+```
+
+<br />
+
+## 3. configureStore
+- `middleware` + createStore 함수
+- redux devtools를 사용하려면 `createStore`는 미들웨어를 직접 적용해야 하지만, `configureStore`은 rtk가 필요한 미들웨어를 자동으로 설정한다.
+
+## 4. createSlice
+- `action`과 `reducer`를 한번에 생성해줌
+```tsx
+import shortid from "shortid";
+import { createStore } from "redux";
+import { createSlice, configureStore, createReducer, createAction, PayloadAction } from "@reduxjs/toolkit";
+
+export type RootState = {
+  todos: Todo[];
+};
+
+export type Todo = {
+  id: string;
+  text: string;
+}
+
+const initialState: RootState = {
+  todos: [
+    {
+      id: shortid(),
+      text: "리액트 공부하기"
+    },
+    {
+      id: shortid(),
+      text: "밥먹기",
+    }
+  ]
+}
+
+// 3. createSlice
+const todoSlice = createSlice({
+  name: "todosReducer",
+  initialState,
+  reducers: {
+    add: (state, action) => {
+      state.todos.push({ text: action.payload, id: shortid() });
+    },
+    remove: (state, action) => {
+      state.todos = state.todos.filter(todo => todo.id !== action.payload);
+    }
+  }
+})
+
+const store = configureStore({
+  reducer: todoSlice.reducer
+});
+
+export const { add, remove } = todoSlice.actions;
 export default store;
 ```
