@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { RootState, addTodo } from "../redux/store";
+import { useDispatch } from "react-redux";
+import { addTodo } from "../redux/store";
 import Todos from "../components/Todos";
 
 const Home = () => {
