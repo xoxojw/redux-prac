@@ -1,4 +1,4 @@
-# 정리
+# 🖊️ 정리
 
 ## 1. createAction + 직접 reducer 설정
 - rtk의 `createAction` 함수를 사용하여 action creator 정의
@@ -12,8 +12,6 @@
 - `createAction` 함수는 1번 방법과 마찬가지로 action creator를 정의하는데 사용
 - `createReducer` 함수는 reducer를 보다 간결하게 정의하고, action type에 따라 state 업데이트를 자동으로 처리하는 reducer 함수를 생성한다.
 - state를 직접 수정해도 `immer`의 존재 때문에 상태의 불변성이 유지되며, 새로운 state로 반환할 필요가 없음
-
-<br />
 
 ### RTK 2.0.0부터 `createReducer` 대신 `builder callback` 기반으로 변경
 > console.log 경고 메시지
@@ -78,6 +76,8 @@ export default store;
 ## 3. configureStore
 - `middleware` + createStore 함수
 - redux devtools를 사용하려면 `createStore`는 미들웨어를 직접 적용해야 하지만, `configureStore`은 rtk가 필요한 미들웨어를 자동으로 설정한다.
+
+<br />
 
 ## 4. createSlice
 - `action`과 `reducer`를 한번에 생성해줌
